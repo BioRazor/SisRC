@@ -106,5 +106,5 @@ class Laptop(models.Model):
 
 	cargador = models.BooleanField(default=True)
 	bolso = models.BooleanField(default=False)
-	bateria = models.BooleanField(default=True)
+	bateria = models.BooleanField(default= True)
 	detalles = models.TextField(default='Ninguno')
