@@ -45,3 +45,7 @@ class TecnicoAdmin(admin.ModelAdmin):
 @admin.register(Servicio)
 class ServicioAdmin(admin.ModelAdmin):
 	pass
+
+@admin.register(Servicio_Tecnico)
+class Servicio_TecnicoAdmin(admin.ModelAdmin):
+    pass
