@@ -91,3 +91,20 @@ class Desktop(models.Model):
 	class Meta:
 		verbose_name='Computadora'
 		verbose_name_plural='Computadoras'
+
+class Laptop(models.Model):
+	cliente = models.ForeignKey('cliente.Cliente')
+
+	marca = models.CharField(blank=False, max_length=50)
+	modelo = models.CharField(blank=False, max_length=50)
+	serial = models.CharField(blank=False, max_length=50)
+	tipos=(
+		('Mini','Mini'),
+		('Laptop', 'Laptop')
+		)
+	tipo = models.CharField(choices=tipos, max_length=50)
+
+	cargador = models.BooleanField(default=True)
+	bolso = models.BooleanField(default=False)
+	bateria = models.BooleanField(default=True)
+	detalles = models.TextField(default='Ninguno')

@@ -12,5 +12,5 @@ DATABASES = {
     }
 }
 
-
+STATIC_ROOT = BASE_DIR.child('staticfiles')
 STATIC_URL = '/static/'
