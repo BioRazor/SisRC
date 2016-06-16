@@ -1,0 +1,6 @@
+*Python ByteCode
+
+*.py[co]
+*.pyc
+
+entorno/
