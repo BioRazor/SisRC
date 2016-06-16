@@ -5,18 +5,17 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1u7fj82igoomm',
-        'USER': 'qivxttzczsbeug',
-        'PASSWORD': 'Y3pIBSgeFE4I_9TWAILR2xvcUD',
-        'HOST': 'ec2-54-227-246-11.compute-1.amazonaws.com',
+        'NAME': 'df338krfvhjohs',
+        'USER': 'iavsvfdwxhooez',
+        'PASSWORD': 'guO0pvXH80K8f_hy5Pito2eKJZ',
+        'HOST': 'ec2-54-221-235-135.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
-"""
+
 
 STATIC_ROOT = BASE_DIR.child('staticfiles')
 STATIC_URL = '/static/'
