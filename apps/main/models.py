@@ -80,6 +80,9 @@ class Servicio(models.Model):
 	nombre = models.CharField(blank=False, max_length=50)
 	precio = models.PositiveSmallIntegerField(blank=False)
 
+	def __str__(self):
+		return(self.nombre + ' ' + str(self.precio))
+
 	class Meta:
 		verbose_name='Servicio'
 		verbose_name_plural='Servicios'

@@ -26,6 +26,7 @@ class datos_basico(models.Model):
 
 
 class Ram(datos):
+	pass
 	class Meta:
 		verbose_name='Memoria Ram'
 		verbose_name_plural='Memorias Ram'	
@@ -78,14 +79,14 @@ class Adicional(datos_basico):
 class Desktop(models.Model):
 	cliente = models.ForeignKey('cliente.Cliente')
 
-	am = models.ManyToManyField(Ram)
-	dd = models.ManyToManyField(DD)
-	cdRom = models.ManyToManyField(CdRom)
-	adicional = models.ManyToManyField(Adicional)
+	am = models.ManyToManyField(Ram, verbose_name='Memorias Ram')
+	dd = models.ManyToManyField(DD, verbose_name='Discos Duros')
+	cdRom = models.ManyToManyField(CdRom, verbose_name='Quemadoras')
+	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales')
 
-	fuente = models.ForeignKey(Fuente)
-	cpu = models.ForeignKey(Cpu)
-	moBo = models.ForeignKey(MoBo)
+	fuente = models.ForeignKey(Fuente, verbose_name='Fuente de Poder')
+	cpu = models.ForeignKey(Cpu, verbose_name='Procesador')
+	moBo = models.ForeignKey(MoBo, verbose_name='Tarjeta Madre')
 	detalles = models.TextField(default='Ninguna')
 
 	class Meta:
