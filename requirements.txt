@@ -1,6 +1,9 @@
-django==1.9
+Django==1.9.7
+html5lib==0.9999999
 Pillow==3.0.0
-psycopg2==2.6.1
+pyPdf==1.13
+reportlab==3.3.0
+six==1.10.0
 Unipath==1.1
-gunicorn==19.4.5
 whitenoise==2.0.6
+xhtml2pdf==0.1b1
