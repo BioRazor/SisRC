@@ -47,7 +47,8 @@ class ServicioAdmin(admin.ModelAdmin):
     list_display=('nombre', 'precio')
     list_filter=('precio',)
     search_fields=('nombre',)
+    
 
 @admin.register(Servicio_Tecnico)
 class Servicio_TecnicoAdmin(admin.ModelAdmin):
-    pass
+    raw_id_fields=('cliente',)

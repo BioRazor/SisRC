@@ -1,0 +1,30 @@
+<!--Se Cargan los Archivos estaticos-->
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		{% block titulo %}
+			
+		{% endblock titulo %}
+	</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+	<!-- Se define el bloque cuerpo, donde se insertara todo el contenido a mostrar-->
+	{% block cuerpo %}
+	
+		
+	{% endblock cuerpo %}
+
+	<!--Se define el bloque de pie de pagina-->
+	{% block pie %}
+		
+	{% endblock pie %}
+
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

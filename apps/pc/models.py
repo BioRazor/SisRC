@@ -26,7 +26,8 @@ class datos_basico(models.Model):
 
 
 class Ram(datos):
-	pass
+	def __str__(self):
+		return ('%s - %s - %s%s') %(self.marca, self.modelo, self.capacidad,self.unidad)
 	class Meta:
 		verbose_name='Memoria Ram'
 		verbose_name_plural='Memorias Ram'	
