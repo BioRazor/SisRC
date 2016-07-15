@@ -24,5 +24,7 @@ def generarPDF(template_src, context_dict):
 		pdf = pias.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
 
 	if not pdf.err:
-		return HttpResponse(result.getvalue(), content_type='application/pdf')
+		response = HttpResponse(result.getvalue(), content_type='application/pdf')
+		response['Content-Disposition'] = 'attachment; filename="%s.pdf"' %(context_dict['tipo'])
+		return response
 	return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
