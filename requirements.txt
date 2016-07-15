@@ -9,3 +9,4 @@ Unipath==1.1
 whitenoise==2.0.6
 xhtml2pdf==0.1b1
 gunicorn==19.4.5
+psycopg2
