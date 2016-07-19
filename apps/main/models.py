@@ -100,8 +100,11 @@ class Servicio_Tecnico(models.Model):
 	cancelado = models.BooleanField(blank=False)
 	fecha_recepcion = models.DateField(auto_now_add=True)
 	fecha_finalizacion = models.DateField(blank=True)
-	fecha_entrega = models.DateField(blank=True)
+	fecha_entrega = models.DateField(blank=True, null=True)
 	observaciones = models.TextField(blank=False, default='Ninguna')
+
+	def __str__(self):
+		return ('%s - %s - %s') %(self.cliente, self.tecnico, self.fecha_recepcion)
 
 	class Meta:
 		verbose_name='Servicio Tecnico'

@@ -8,10 +8,10 @@ def myview(request):
 				'contenido' : 'Generado con python 3  reportlab',
                 'tipo' : 'reporte'
 	}
-	return generarPDF('mytemplate.html', context)
+	return generarPDF('pdfservicio.html', context)
 
 class template(TemplateView):
-    template_name = 'mytemplate.html'
+    template_name = 'pdfservicio.html'
 
 class Index(TemplateView):
     template_name= 'index.html'

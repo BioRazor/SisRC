@@ -5,6 +5,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Usuario, Tecnico, Servicio, Servicio_Tecnico
 from .forms import UserChangeForm, UserCreationForm
 
+from .functions import generarPDF
+
 # Register your models here.
 
 
@@ -40,7 +42,7 @@ admin.site.unregister(Group)
 
 @admin.register(Tecnico)
 class TecnicoAdmin(admin.ModelAdmin):
-	pass
+    pass
 
 @admin.register(Servicio)
 class ServicioAdmin(admin.ModelAdmin):
@@ -51,4 +53,10 @@ class ServicioAdmin(admin.ModelAdmin):
 
 @admin.register(Servicio_Tecnico)
 class Servicio_TecnicoAdmin(admin.ModelAdmin):
+
+    def getPDF(self, request, queryset):
+        for servicio in queryset:
+            return generarPDF('pdfservicio.html', servicio, servicio)
+    getPDF.short_description = "Generar PDF's"
     raw_id_fields=('cliente',)
+    actions = ['getPDF']

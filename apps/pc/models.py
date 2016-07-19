@@ -37,7 +37,7 @@ class DD(datos_basico):
 		verbose_name='Disco Duro'
 		verbose_name_plural='Discos Duros'
 
-class CdRom(datos):
+class CdRom(datos_basico):
 	class Meta:
 		verbose_name='CD-ROM'
 
@@ -83,7 +83,7 @@ class Desktop(models.Model):
 	am = models.ManyToManyField(Ram, verbose_name='Memorias Ram')
 	dd = models.ManyToManyField(DD, verbose_name='Discos Duros')
 	cdRom = models.ManyToManyField(CdRom, verbose_name='Quemadoras')
-	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales')
+	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales', null=True, blank=True)
 
 	fuente = models.ForeignKey(Fuente, verbose_name='Fuente de Poder')
 	cpu = models.ForeignKey(Cpu, verbose_name='Procesador')
