@@ -66,9 +66,13 @@ class Cpu(models.Model):
 		('Ghz', 'Ghz')
 		)
 	fabricante = models.CharField(blank=False, choices=fabricantes, default='INTEL', max_length=50)
+	modelo = models.CharField(blank=False, max_length=50)
 	unidad = models.CharField(choices=unidades, default='Ghz', blank=False, max_length=50)
 	capacidad = models.PositiveSmallIntegerField(blank=False)
 	socket = models.CharField(blank=False, default='775', max_length=50)
+
+	def __str__(self):
+		return ('%s - %s - %s%s - %s') %(self.fabricante, self.modelo, self.capacidad, self.unidad, self.socket)
 
 	class Meta:
 		verbose_name='Procesador'
@@ -87,10 +91,17 @@ class Adicional(datos_basico):
 		verbose_name="Dispositivo Adicional"
 		verbose_name_plural='Dispositivos Adicionales'
 
+class Estado_PC(models.Model):
+	estado = models.CharField(blank=False, max_length=50)
+
+	def __str__(self):
+		return (self.estado)
+
 class Desktop(models.Model):
 	cliente = models.ForeignKey('cliente.Cliente')
 
-	am = models.ManyToManyField(Ram, verbose_name='Memorias Ram')
+	estado = models.ManyToManyField(Estado_PC)
+	ram = models.ManyToManyField(Ram, verbose_name='Memorias Ram')
 	dd = models.ManyToManyField(DD, verbose_name='Discos Duros')
 	cdRom = models.ManyToManyField(CdRom, verbose_name='Quemadoras')
 	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales', blank=True)
@@ -100,6 +111,9 @@ class Desktop(models.Model):
 	moBo = models.ForeignKey(MoBo, verbose_name='Tarjeta Madre')
 	detalles = models.TextField(default='Ninguna')
 
+	def __str__(self):
+		return('%s - %s') %(str(self.id), self.cliente)
+
 	class Meta:
 		verbose_name='Computadora'
 		verbose_name_plural='Computadoras'
@@ -107,6 +121,7 @@ class Desktop(models.Model):
 class Laptop(models.Model):
 	cliente = models.ForeignKey('cliente.Cliente')
 
+	estado = models.ManyToManyField(Estado_PC)
 	marca = models.CharField(blank=False, max_length=50)
 	modelo = models.CharField(blank=False, max_length=50)
 	serial = models.CharField(blank=False, max_length=50)

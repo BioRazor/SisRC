@@ -113,7 +113,7 @@ class Servicio_Tecnico_Desktop(models.Model):
 @receiver(pre_save, sender=Servicio_Tecnico_Desktop, dispatch_uid="Obtener_PDF")
 def getPDF(sender, instance, **kwargs):
 	from .functions import generarPDF
-	return generarPDF('pdfservicio.html', instance, instance)
+	return generarPDF('pdfservicio.html', instance, instance, 'Desktop')
 	
 class Servicio_Tecnico_Laptop(models.Model):
 	cliente = models.ForeignKey('cliente.Cliente')

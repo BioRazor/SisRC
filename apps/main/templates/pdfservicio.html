@@ -42,10 +42,29 @@
 				<th>Cliente:</th><td>{{ cliente.nombre }}</td><th>Teléfono:</th><td>{{ cliente.prefijo_telefono }}-{{ cliente.telefono }}</td><th>ID PC:</th><td>{{ pc_id }}{{ laptop_id }}</td>
 			</tr>
 			{% if pc %}
+				<tr>
+					<th colspan="3">Computadora de Escritorio</th><th colspan="3">Detalles</th>					
+				</tr>
+				<tr>
+					<th>CPU:</th><td colspan="2">{{ pc.cpu }}</td><td colspan="3" rowspan="4">{{ pc.detalles }}</td>
+				</tr>
+				<tr>
+					<th>T. Madre:</th><td colspan="2">{{ pc.moBo }}</td>
+				</tr>
+				{% for ram in pc.ram.all %}
 					<tr>
-						<th>MOBO:</th><td>{{ pc.moBo }}</td>
-					</tr>		
+						<th>RAM {{ forloop.counter }}</th><td colspan="2">{{ ram }}</td>
+					</tr>
+				{% endfor %}
+				{% for dd in pc.dd.all %}
+					<tr>
+						<th>DD {{ forloop.counter }}</th><td colspan="2">{{ dd }}</td>
+					</tr>
+				{% endfor %}
 			{% endif %}		
+				<tr>
+					<th colspan="3">Estado del Equipo</th><th colspan="3">Servicio a Realizar</th>
+				</tr>		
 		</table>
 	</div>
 
