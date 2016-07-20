@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class datos(models.Model):
@@ -13,6 +14,10 @@ class datos(models.Model):
 		)
 	unidad = models.CharField(blank=False, choices=sufijos_capacidad, default='Gb', max_length=2)
 	serial = models.CharField(blank=True, max_length=50)
+
+	def __str__(self):
+		return ('%s - %s - %s%s') %(self.marca, self.modelo, self.capacidad,self.unidad)
+
 	class Meta:
 		abstract=True
 
@@ -21,6 +26,10 @@ class datos_basico(models.Model):
 	modelo = models.CharField(blank=False, max_length=50)
 	serial = models.CharField(blank=True, max_length=50)
 	capacidad = models.CharField(blank=True, max_length=50)
+
+	def __str__(self):
+		return ('%s - %s - %s') %(self.marca, self.modelo, self.capacidad)
+
 	class Meta:
 		abstract = True
 
@@ -33,6 +42,7 @@ class Ram(datos):
 		verbose_name_plural='Memorias Ram'	
 
 class DD(datos_basico):
+
 	class Meta:
 		verbose_name='Disco Duro'
 		verbose_name_plural='Discos Duros'
@@ -83,7 +93,7 @@ class Desktop(models.Model):
 	am = models.ManyToManyField(Ram, verbose_name='Memorias Ram')
 	dd = models.ManyToManyField(DD, verbose_name='Discos Duros')
 	cdRom = models.ManyToManyField(CdRom, verbose_name='Quemadoras')
-	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales', null=True, blank=True)
+	adicional = models.ManyToManyField(Adicional, verbose_name='Dispositivos Adicionales', blank=True)
 
 	fuente = models.ForeignKey(Fuente, verbose_name='Fuente de Poder')
 	cpu = models.ForeignKey(Cpu, verbose_name='Procesador')

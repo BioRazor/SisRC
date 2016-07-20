@@ -1,6 +1,7 @@
 #encoding:utf-8
 from django.db import models
-
+from django.db.models.signals import post_save, pre_save
+from django.dispatch import receiver
 #imports necesarios para crear un Custom User Manager
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -87,19 +88,18 @@ class Servicio(models.Model):
 		verbose_name='Servicio'
 		verbose_name_plural='Servicios'
 
-class Servicio_Tecnico(models.Model):
+class Servicio_Tecnico_Desktop(models.Model):
 	cliente = models.ForeignKey('cliente.Cliente')
 	tecnico = models.ForeignKey(Tecnico)
 	pc = models.ForeignKey('pc.Desktop')
-	#laptop = models.ForeignKey('pc.Laptop')
 
 	servicios = models.ManyToManyField(Servicio)
 
 	total = models.PositiveSmallIntegerField(blank=True)
-	abono = models.PositiveSmallIntegerField(blank=True)
+	abono = models.PositiveSmallIntegerField(blank=True, null=True)
 	cancelado = models.BooleanField(blank=False)
 	fecha_recepcion = models.DateField(auto_now_add=True)
-	fecha_finalizacion = models.DateField(blank=True)
+	fecha_finalizacion = models.DateField(blank=True, null=True)
 	fecha_entrega = models.DateField(blank=True, null=True)
 	observaciones = models.TextField(blank=False, default='Ninguna')
 
@@ -109,3 +109,31 @@ class Servicio_Tecnico(models.Model):
 	class Meta:
 		verbose_name='Servicio Tecnico'
 		verbose_name_plural='Servicios Tecnicos'
+
+@receiver(pre_save, sender=Servicio_Tecnico_Desktop, dispatch_uid="Obtener_PDF")
+def getPDF(sender, instance, **kwargs):
+	from .functions import generarPDF
+	return generarPDF('pdfservicio.html', instance, instance)
+	
+class Servicio_Tecnico_Laptop(models.Model):
+	cliente = models.ForeignKey('cliente.Cliente')
+	tecnico = models.ForeignKey(Tecnico)
+	pc = models.ForeignKey('pc.Laptop')
+
+	servicios = models.ManyToManyField(Servicio)
+
+	total = models.PositiveSmallIntegerField(blank=True)
+	abono = models.PositiveSmallIntegerField(blank=True, null=True)
+	cancelado = models.BooleanField(blank=False)
+	fecha_recepcion = models.DateField(auto_now_add=True)
+	fecha_finalizacion = models.DateField(blank=True, null=True)
+	fecha_entrega = models.DateField(blank=True, null=True)
+	observaciones = models.TextField(blank=False, default='Ninguna')
+
+	def __str__(self):
+		return ('%s - %s - %s') %(self.cliente, self.tecnico, self.fecha_recepcion)
+
+	class Meta:
+		verbose_name='Servicio Tecnico'
+		verbose_name_plural='Servicios Tecnicos'
+

@@ -18,17 +18,34 @@
     <style>
 	    * {
 	      font-family: sans-serif;
-	    }
+	    }	    
+	</style>
+	<style>
+		table, th, td {
+		    border: 1px solid black;
+		    border-collapse: collapse;
+		}
+		th, td {
+		    padding-top: 2px;
+		}
 	</style>
 </head>
 <body>
 	<div align="center">
 		<h1>Hoja de servicio</h1>
 
-		<table border="1">
+		<table>
 			<tr>
-				<th>Tecnico:</th> <td>{{ tecnico }}</td> <th>Tellefono:</th> <td>{{ tecnico.prefijo_telefono }}-{{ tecnico.telefono }}</td> <th>Fecha:</th> <td>{{ fecha_recepcion }}</td>
-			</tr>			
+				<th>Tecnico:</th> <td>{{ tecnico }}</td> <th>Teléfono:</th> <td>{{ tecnico.prefijo_telefono }}-{{ tecnico.telefono }}</td> <th>Fecha:</th> <td>{{ fecha_recepcion }}</td>
+			</tr>
+			<tr>
+				<th>Cliente:</th><td>{{ cliente.nombre }}</td><th>Teléfono:</th><td>{{ cliente.prefijo_telefono }}-{{ cliente.telefono }}</td><th>ID PC:</th><td>{{ pc_id }}{{ laptop_id }}</td>
+			</tr>
+			{% if pc %}
+					<tr>
+						<th>MOBO:</th><td>{{ pc.moBo }}</td>
+					</tr>		
+			{% endif %}		
 		</table>
 	</div>
 

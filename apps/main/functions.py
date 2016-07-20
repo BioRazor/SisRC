@@ -11,11 +11,30 @@ from django.template import Context
 from django.http import HttpResponse
 from cgi import escape
 
-def generarPDF(template_src, context_dict, nombre):
+from .models import Tecnico
+from apps.cliente.models import Cliente
+from apps.pc.models import Desktop, Laptop
+
+def generarPDF(template_src, context_dict, nombre, tipo):
 	if not nombre:
 		nombre = 'reporte'
 	template = get_template(template_src)
-	context = context_dict
+	#.__dict__ para hacer del objeto un diccionario
+	context = context_dict.__dict__
+	#Como no guarda el objeto tecnico, se obtiene de acuerdo al id (Que si muestra)
+	tecnico = Tecnico.objects.get(id = context['tecnico_id'])
+	#Se asigna en un nuevo campo el tecnico
+	context['tecnico'] = tecnico
+	cliente = Cliente.objects.get(id= context['cliente_id'])
+	context['cliente'] = cliente
+	
+	if tipo == 'Laptop':
+		pc = Laptop.objects.get(id=context['pc_id'])
+		context['laptop'] = pc
+	else:
+		pc = Desktop.objects.get(id=context['pc_id'])
+		context['pc'] = pc
+
 	html  = template.render(context)
 	#para python 3
 	try:

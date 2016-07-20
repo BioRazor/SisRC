@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import Usuario, Tecnico, Servicio, Servicio_Tecnico
+from .models import Usuario, Tecnico, Servicio, Servicio_Tecnico_Desktop
 from .forms import UserChangeForm, UserCreationForm
 
 from .functions import generarPDF
@@ -51,12 +51,13 @@ class ServicioAdmin(admin.ModelAdmin):
     search_fields=('nombre',)
     
 
-@admin.register(Servicio_Tecnico)
+@admin.register(Servicio_Tecnico_Desktop)
 class Servicio_TecnicoAdmin(admin.ModelAdmin):
 
     def getPDF(self, request, queryset):
         for servicio in queryset:
-            return generarPDF('pdfservicio.html', servicio, servicio)
+            return generarPDF('pdfservicio.html', servicio, servicio, 'Desktop')
     getPDF.short_description = "Generar PDF's"
+
     raw_id_fields=('cliente',)
     actions = ['getPDF']
