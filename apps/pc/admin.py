@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Desktop, Ram, DD, CdRom, MoBo, Fuente, Cpu, Adicional, Laptop
+from .models import Desktop, Ram, DD, CdRom, MoBo, Fuente, Cpu, Adicional, Laptop, Estado_PC
 # Register your models here.
 
 @admin.register(Desktop)
@@ -37,4 +37,8 @@ class AdicionalAdmin(admin.ModelAdmin):
 
 @admin.register(Laptop)
 class LaptopAdmin(admin.ModelAdmin):
+	pass
+
+@admin.register(Estado_PC)
+class EstadoPCADmin(admin.ModelAdmin):
 	pass

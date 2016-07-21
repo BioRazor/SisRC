@@ -32,7 +32,7 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Hoja de servicio</h1>
+		<h1 style="font-size:20px">Hoja de servicio</h1>
 
 		<table>
 			<tr>
@@ -41,10 +41,14 @@
 			<tr>
 				<th>Cliente:</th><td>{{ cliente.nombre }}</td><th>Teléfono:</th><td>{{ cliente.prefijo_telefono }}-{{ cliente.telefono }}</td><th>ID PC:</th><td>{{ pc_id }}{{ laptop_id }}</td>
 			</tr>
+		</table>
 
+		<br>
+
+		<table>
 			{% if pc %}
 				<tr>
-					<th colspan="3">Computadora de Escritorio</th><th colspan="3">Detalles sobre el Equipo</th>					
+					<th colspan="3" style="background-color: #E0FFFF;">Computadora de Escritorio</th><th colspan="3">Detalles sobre el Equipo</th>					
 				</tr>
 				<tr>
 					<th>CPU:</th><td colspan="2">{{ pc.cpu }}</td><td colspan="3" rowspan="6">{{ pc.detalles }}</td>
@@ -114,7 +118,48 @@
 			{% endif %}	
 				<tr>
 					<th colspan="3">Estado del Equipo</th><th colspan="3">Servicio(s) a Realizar</th>
+				</tr>
+				<tr>
+					<td colspan="3">
+						{% for estado in pc.estado.all %}
+							<b>*</b> {{ estado }}<br>
+						{% endfor %}
+					</td>
+					<td colspan="3">
+						{% for servicio in servicios %}
+							&#10004; {{ servicio }}<br>
+						{% endfor %}
+					</td>
+				</tr>
+				<tr>
+					<th colspan="6">Detalles del servicio</th>
+				</tr>
+				<tr>
+					<td colspan="6" style="height:100px">{{ observaciones }}</td>
+				</tr>
+			</table>
+			
+			<br>
+			
+			<table>
+				<tr>
+					<th>Cancelado:</th><td>{% if pago %}&#10004;&#10004;{% else %}NO{% endif %}</td><th>Total:</th><td>{{ total }}Bs</td><th>Abono:</th><td>{{ abono }}</td>
+				</tr>
+				<tr>
+					<th colspan="6">
+						No nos hacemos responsables por el equipo, en cuanto a funcionamiento y deterioro luego de 7 días del servicio.
+					</th>
 				</tr>		
+				<tr>
+					<th colspan="6">
+						Y se dispondrá de las piezas instaladas al equipo en caso de que las mismas no hayan sido canceladas.
+					</th>
+				</tr>
+				<tr>
+					<th colspan="6">
+						Por razones obvias el cliente debe tener respaldo de su información "escencial" contenida en su Disco Duro, es de su responsabilidad.
+					</th>
+				</tr>
 		</table>
 	</div>
 

@@ -2,7 +2,7 @@
 try:
 	import io
 #para python 2
-except:
+except ImportError:
 	import cStringIO as StringIO
 
 from xhtml2pdf import pisa
@@ -34,14 +34,14 @@ def generarPDF(template_src, context_dict, nombre, tipo):
 	else:
 		pc = Desktop.objects.get(id=context['pc_id'])
 		context['pc'] = pc
-
+		
+	context['servicios'] = context_dict.servicios.all()
 	html  = template.render(context)
-
 	
 	try:
 		result = io.BytesIO()
 		pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
-	except:
+	except ImportError:
 		result = StringIO.StringIO()
 		pdf = pias.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result)
 
