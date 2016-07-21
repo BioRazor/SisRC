@@ -107,8 +107,8 @@ class Servicio_Tecnico_Desktop(models.Model):
 		return ('%s - %s - %s') %(self.cliente, self.tecnico, self.fecha_recepcion)
 
 	class Meta:
-		verbose_name='Servicio Tecnico'
-		verbose_name_plural='Servicios Tecnicos'
+		verbose_name='Servicio Tecnico PC'
+		verbose_name_plural='Servicios Tecnicos PCs'
 
 @receiver(pre_save, sender=Servicio_Tecnico_Desktop, dispatch_uid="Obtener_PDF")
 def getPDF(sender, instance, **kwargs):
@@ -134,6 +134,6 @@ class Servicio_Tecnico_Laptop(models.Model):
 		return ('%s - %s - %s') %(self.cliente, self.tecnico, self.fecha_recepcion)
 
 	class Meta:
-		verbose_name='Servicio Tecnico'
-		verbose_name_plural='Servicios Tecnicos'
+		verbose_name='Servicio Tecnico Laptop'
+		verbose_name_plural='Servicios Tecnicos Laptops' 
 

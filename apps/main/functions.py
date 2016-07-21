@@ -36,7 +36,8 @@ def generarPDF(template_src, context_dict, nombre, tipo):
 		context['pc'] = pc
 
 	html  = template.render(context)
-	#para python 3
+
+	
 	try:
 		result = io.BytesIO()
 		pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)

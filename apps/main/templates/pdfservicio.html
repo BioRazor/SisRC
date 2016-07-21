@@ -41,12 +41,13 @@
 			<tr>
 				<th>Cliente:</th><td>{{ cliente.nombre }}</td><th>Teléfono:</th><td>{{ cliente.prefijo_telefono }}-{{ cliente.telefono }}</td><th>ID PC:</th><td>{{ pc_id }}{{ laptop_id }}</td>
 			</tr>
+
 			{% if pc %}
 				<tr>
-					<th colspan="3">Computadora de Escritorio</th><th colspan="3">Detalles</th>					
+					<th colspan="3">Computadora de Escritorio</th><th colspan="3">Detalles sobre el Equipo</th>					
 				</tr>
 				<tr>
-					<th>CPU:</th><td colspan="2">{{ pc.cpu }}</td><td colspan="3" rowspan="4">{{ pc.detalles }}</td>
+					<th>CPU:</th><td colspan="2">{{ pc.cpu }}</td><td colspan="3" rowspan="6">{{ pc.detalles }}</td>
 				</tr>
 				<tr>
 					<th>T. Madre:</th><td colspan="2">{{ pc.moBo }}</td>
@@ -61,9 +62,58 @@
 						<th>DD {{ forloop.counter }}</th><td colspan="2">{{ dd }}</td>
 					</tr>
 				{% endfor %}
-			{% endif %}		
+				{% for cdRom in pc.cdRom.all %}
+					<tr>
+						<th>CD Room {{ forloop.counter }}</th><td colspan="2">{{ cdRom }}</td>
+					</tr>
+				{% endfor %}
+				{% for adicional in pc.adicional.all %}
+					<tr>
+						<th>Dips. Adicional {{ forloop.counter }}</th><td colspan="2">{{ adicional }}</td>
+					</tr>
+				{% endfor %}
 				<tr>
-					<th colspan="3">Estado del Equipo</th><th colspan="3">Servicio a Realizar</th>
+					<th>Fuente de Poder:</th><td colspan="2">{{ pc.fuente }}</td>
+				</tr>
+				
+			{% endif %}	
+
+			{% if laptop %}
+				<tr>
+					<th colspan="3">Laptop</th><th colspan="3">Detalles sobre el Equipo</th>
+				</tr>
+				<tr>
+					<th>Marca:</th><td colspan="2">{{ laptop.marca }}</td><td rowspan="5" colspan="3">{{ laptop.detalles }}</td>
+				</tr>
+				<tr>
+					<th>Modelo:</th><td colspan="2">{{ laptop.modelo }}</td>
+				</tr>
+				<tr>
+					<th>Serial:</th><td colspan="2">{{ laptop.serial }}</td>
+				</tr>
+				<tr>
+					<th>Cargador:</th>
+					<td colspan="2">
+						{% if laptop.cargador %}
+							Si
+							{% else %}
+								No
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<th>Bateria:</th>
+					<td colspan="2">
+						{% if laptop.bateria %}
+							Si
+							{% else %}
+								No
+						{% endif %}
+					</td>
+				</tr>
+			{% endif %}	
+				<tr>
+					<th colspan="3">Estado del Equipo</th><th colspan="3">Servicio(s) a Realizar</th>
 				</tr>		
 		</table>
 	</div>

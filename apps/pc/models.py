@@ -132,6 +132,12 @@ class Laptop(models.Model):
 	tipo = models.CharField(choices=tipos, max_length=50)
 
 	cargador = models.BooleanField(default=True)
-	bolso = models.BooleanField(default=False)
 	bateria = models.BooleanField(default= True)
 	detalles = models.TextField(default='Ninguno')
+
+	def __str__(self):
+		return('%s - %s') %(str(self.id), self.cliente)
+
+	class Meta:
+		verbose_name='Laptop'
+		verbose_name_plural='Laptops'
