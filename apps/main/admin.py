@@ -59,8 +59,16 @@ class Servicio_TecnicoAdmin(admin.ModelAdmin):
             return generarPDF('pdfservicio.html', servicio, servicio, 'Desktop')
     getPDF.short_description = "Generar PDF's"
 
+    def button(self, obj):
+        print(obj)
+        link = u'<a class="button" href="/pdf/%s">PDF</a>' %(obj.id)
+        return (link)
+    button.short_description = 'PDF'
+    button.allow_tags = True
+
     raw_id_fields=('cliente',)
     actions = ['getPDF']
+    list_display = ['pc', 'tecnico', 'cliente', 'fecha_recepcion', 'fecha_finalizacion', 'fecha_entrega', 'button']
 
 @admin.register(Servicio_Tecnico_Laptop)
 class Servicio_TecnicoAdmin(admin.ModelAdmin):
@@ -70,5 +78,13 @@ class Servicio_TecnicoAdmin(admin.ModelAdmin):
             return generarPDF('pdfservicio.html', servicio, servicio, 'Laptop')
     getPDF.short_description = "Generar PDF's"
 
+    def button(self, obj):
+        print(obj)
+        link = u'<a class="button" href="/pdf/%s">PDF</a>' %(obj.id)
+        return (link)
+    button.short_description = 'PDF'
+    button.allow_tags = True
+
     raw_id_fields=('cliente',)
     actions = ['getPDF']
+    list_display = ['pc', 'tecnico', 'cliente', 'fecha_recepcion', 'fecha_finalizacion', 'fecha_entrega', 'button']
