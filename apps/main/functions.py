@@ -48,5 +48,6 @@ def generarPDF(template_src, context_dict, nombre, tipo):
 	if not pdf.err:
 		response = HttpResponse(result.getvalue(), content_type='application/pdf')
 		response['Content-Disposition'] = 'attachment; filename="%s.pdf"' %(nombre)
+		print(response['Content-Disposition'])
 		return response
 	return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
